@@ -30,11 +30,12 @@ var Note = React.createClass({
 	renderDisplay: function () {
 		return React.createElement(
 			'div',
-			{ className: 'note', style: this.style },
+			//Edit on click
+			{ onClick: this.edit, className: 'note', style: this.style },
 			React.createElement(
 				'p',
 				null,
-				this.props.children
+				this.props.children += ' '
 			),
 			React.createElement(
 				'span',
@@ -44,11 +45,21 @@ var Note = React.createClass({
 			)
 		);
 	},
+	handleTest: function(e) {
+        if (e.keyCode == 13 && e.shiftKey) {
+		  return true;
+        }
+		else if (e.keyCode == 13) {
+		  // Save function
+          this.props.onChange(this.refs.newNote.getDOMNode().value, this.props.index);
+		  this.setState({ editing: false });
+		}
+	},
 	renderForm: function () {
 		return React.createElement(
 			'div',
 			{ className: 'note', style: this.style },
-			React.createElement('textarea', { ref: 'newNote', defaultValue: this.props.children, className: 'form-control', autoFocus: true }),
+			React.createElement('textarea', { ref: 'newNote', defaultValue: this.props.children, className: 'form-control', autoFocus: true, onKeyDown: this.handleTest }),
 			React.createElement('button', { onClick: this.save, className: 'btn btn-success btn-sm glyphicon glyphicon-ok' })
 		);
 	},
