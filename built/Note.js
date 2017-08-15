@@ -35,7 +35,7 @@ var Note = React.createClass({
 			React.createElement(
 				'p',
 				null,
-				this.props.children += ' '
+				this.props.children
 			),
 			React.createElement(
 				'span',
@@ -55,11 +55,17 @@ var Note = React.createClass({
 		  this.setState({ editing: false });
 		}
 	},
+	// Move cursor to end of note
+	moveCaretAtEnd(e) {
+	    var temp_value = e.target.value
+	    e.target.value = ''
+	    e.target.value = temp_value
+	},
 	renderForm: function () {
 		return React.createElement(
 			'div',
 			{ className: 'note', style: this.style },
-			React.createElement('textarea', { ref: 'newNote', defaultValue: this.props.children, className: 'form-control', autoFocus: true, onKeyDown: this.handleTest }),
+			React.createElement('textarea', { ref: 'newNote', defaultValue: this.props.children, className: 'form-control', autoFocus: true, onFocus: this.moveCaretAtEnd, onKeyDown: this.handleTest }),
 			React.createElement('button', { onClick: this.save, className: 'btn btn-success btn-sm glyphicon glyphicon-ok' })
 		);
 	},
