@@ -28,7 +28,8 @@ div.board {
 }
 
 div.note {
-    height: 150px;
+    min-height: 150px !important;
+    height: auto !important;
     width: 150px;
     background-color: yellow;
     margin: 2px 0;
@@ -46,6 +47,7 @@ div.note p {
     font-size: 22px;
     padding: 5px;
     font-family: "Shadows Into Light", Arial;
+    word-wrap: break-word;
 }
 
 div.note:hover > span {
@@ -65,7 +67,7 @@ div.note button {
 }
 
 div.note > textarea {
-    height: 75%;
+    height: 115px;
     background: rgba(255, 255, 255, .5);
 }
 
